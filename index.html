@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+
+<!-- 
+    HTML5 doctype declaration
+    This tells the browser what version of HTML it
+    should use to render this document
+-->
+
+<!--
+    HTML element is the root element that all elements
+    exist within.
+
+    Setting the lang attribute is primarily used for
+    improving accessibility. For example, it allows
+    screen readers to adapt according to the language 
+    and invoke the correct pronounciation. The lang 
+    attribute can be assigned to individual elements 
+    as well.
+-->
+<html lang ="en">
+
+    <!--
+        head element is where we put important meta-info
+        about the webpage. 
+
+        Do not use any element that displays content on 
+        the page.
+    -->
+    <head>
+        <!--
+            setting the encoding ensures that the webpage will
+            display special symbols and characters from different
+            languages correctly in the broswer
+        -->
+        <meta charset="utf-8">
+
+        <!--
+            Text that appears on the browser tab
+            make it memorable for users that have lots of tabs!
+
+            This is also the text that appears during a google search
+        -->
+        <title>Template Home Page</title>
+
+        <!--
+            link to external css stylesheet
+        -->
+        <link rel="stylesheet" href="./css/style.css">
+
+        <!--
+            link to external js script
+        -->
+        <script src="./js/rock-paper-scissors.js"></script>
+
+    </head>
+
+    <!-- 
+        Body element
+        This is where all the content that will be displayed to
+        users will go.
+    -->
+    <body>
+        <script>
+            PlayGame();
+        </script>
+        
+
+    </body>
+
+</html>
