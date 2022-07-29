@@ -65,6 +65,12 @@ function InputToChoice(Input)
 }
 
 
+function IsValidInput(Input)
+{
+    return IsValidChoice(InputToChoice(Input));
+}
+
+
 function GetRandomChoice()
 {
     let random_value = Math.random() * c_Choice_Count;
@@ -309,7 +315,7 @@ function PlayGame()
     for(let i = 0; i < c_GameMatchCount; i++)
     {
         PlayerInput = "";
-        while(IsValidChoice(InputToChoice(PlayerInput)) == false)
+        while(IsValidInput(PlayerInput) == false)
         {
             PlayerInput = prompt();
         }
