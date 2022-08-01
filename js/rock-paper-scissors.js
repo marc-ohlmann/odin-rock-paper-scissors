@@ -1,67 +1,57 @@
 
 // Choices
-const c_ChoiceID_Rock = 1;
-const c_ChoiceID_Paper = 2;
-const c_ChoiceID_Scissors = 3;
-const c_Choices = [c_ChoiceID_Rock, c_ChoiceID_Paper, c_ChoiceID_Scissors];
+const c_Choice_Null = "None";
+const c_Choice_Rock = "Rock";
+const c_Choice_Paper = "Paper";
+const c_Choice_Scissors = "Scissors";
+const c_Choices = [c_Choice_Rock, c_Choice_Paper, c_Choice_Scissors];
 const c_Choice_Count = c_Choices.length;
 
+// game / match results
+const c_ResultString_Win = "win";
+const c_ResultString_Lose = "lose";
+const c_ResultString_Tie = "tie";
 
-function IsValidChoice(Choice)
-{
-    switch(Choice)
-    {
-        case c_ChoiceID_Rock:
-        case c_ChoiceID_Paper:
-        case c_ChoiceID_Scissors:
-            return true;
-
-        default:
-            return false;
-    }
-}
-
-
-function ChoiceToString(Choice)
-{
-    switch(Choice)
-    {
-        case c_ChoiceID_Rock:
-            return "rock";
-
-        case c_ChoiceID_Paper:
-            return "paper";
-
-        case c_ChoiceID_Scissors:
-            return "scissors";
-
-
-        default:
-            return "none";
-    }
-}
-
-
-function StringToChoice(str)
-{
-    for(var i = 0; i < c_Choices.length; i++)
-    {
-        var ChoiceIterator = c_Choices[i];
-        var ChoiceString = ChoiceToString(ChoiceIterator);
-        if(str == ChoiceString)
-        {
-            return c_Choices[i];
-        }
-    }
-
-
-    return -1;
-}
+// number of matches per game
+const c_GameMatchCount = 5;
 
 
 function InputToChoice(Input)
 {
-    return StringToChoice(String(Input).toLowerCase());
+    let InputString = String(Input).toLowerCase();
+
+    switch(InputString)
+    {
+        case c_Choice_Rock.toLowerCase():
+            return c_Choice_Rock;
+
+        case c_Choice_Paper.toLowerCase():
+            return c_Choice_Paper;
+
+        case c_Choice_Scissors.toLowerCase():
+            return c_Choice_Scissors;
+
+        default:
+            return c_Choice_Null;
+    }
+}
+
+
+function IsValidChoice(Choice)
+{
+    let choice = Choice;
+    switch(choice)
+    {
+        case c_Choice_Rock:
+        case c_Choice_Paper:
+        case c_Choice_Scissors:
+            return true;
+
+        default:
+            console.log("default on choice: " + Choice);
+        case c_Choice_Null:
+            return false;
+    }
 }
 
 
@@ -82,12 +72,6 @@ function GetRandomChoice()
 }
 
 
-function GetRandomChoiceString()
-{
-    return ChoiceToString(GetRandomChoice());
-}
-
-
 function DoesChoiceBeatOtherChoice(Choice, OtherChoice)
 {
     if(Choice == OtherChoice)
@@ -97,52 +81,56 @@ function DoesChoiceBeatOtherChoice(Choice, OtherChoice)
 
     switch(Choice)
     {
-        case c_ChoiceID_Rock:
+        case c_Choice_Rock:
             switch(OtherChoice)
             {
 
-                case c_ChoiceID_Paper:
+                case c_Choice_Paper:
                     return false;
 
-                case c_ChoiceID_Scissors:
+                case c_Choice_Scissors:
                     return true;
 
 
                 default:
+                    console.log("default on other choice type: " + OtherChoice);
                     return false;
             }
 
-        case c_ChoiceID_Paper:
+        case c_Choice_Paper:
             switch(OtherChoice)
             {
-                case c_ChoiceID_Rock:
+                case c_Choice_Rock:
                     return true;
 
-                case c_ChoiceID_Scissors:
+                case c_Choice_Scissors:
                     return false;
 
 
                 default:
+                    console.log("default on other choice type: " + OtherChoice);
                     return false;
             }
             break;
 
-        case c_ChoiceID_Scissors:
+        case c_Choice_Scissors:
             switch(OtherChoice)
             {
-                case c_ChoiceID_Rock:
+                case c_Choice_Rock:
                     return false;
 
-                case c_ChoiceID_Paper:
+                case c_Choice_Paper:
                     return true;
 
 
                 default:
+                    console.log("default on other choice type: " + OtherChoice);
                     return false;
             }
             break;
 
         default:
+            console.log("default on choice type: " + Choice);
             return false;
     }
 }
@@ -159,15 +147,15 @@ function CommitPlayerDecisionToMemory(PlayerDecision)
 {
     switch(PlayerDecision)
     {
-        case c_ChoiceID_Rock:
+        case c_Choice_Rock:
             DecisionCount_Rock++;
             break;
 
-        case c_ChoiceID_Paper:
+        case c_Choice_Paper:
             DecisionCount_Paper++;
             break;
 
-        case c_ChoiceID_Scissors:
+        case c_Choice_Scissors:
             DecisionCount_Scissors++;
             break;
 
@@ -193,29 +181,26 @@ function GenerateChoiceForAI()
     if( DecisionCount_Rock < DecisionCount_Paper && 
         DecisionCount_Rock < DecisionCount_Scissors)
     {
-        return c_ChoiceID_Rock;
+        return c_Choice_Rock;
     }
     else if( DecisionCount_Paper < DecisionCount_Rock && 
         DecisionCount_Paper < DecisionCount_Scissors)
     {
-        return c_ChoiceID_Paper;
+        return c_Choice_Paper;
     }
     else if( DecisionCount_Scissors < DecisionCount_Paper && 
         DecisionCount_Scissors < DecisionCount_Rock)
     {
-        return c_ChoiceID_Scissors;
+        return c_Choice_Scissors;
     }
 
 
     // just pick a random one
-    return GetRandomChoice()
+    return GetRandomChoice();
 }
 
 
 // games, matches, and results
-const c_ResultString_Win = "win";
-const c_ResultString_Lose = "lose";
-const c_ResultString_Tie = "tie";
 
 function GetMatchResult(ChallengingPlayerChoice, OtherPlayerChoice)
 {
@@ -240,25 +225,25 @@ function PlayMatch_ChoicesFinal(ChallengingPlayerChoice, OtherPlayerChoice)
     {
         return c_ResultString_Tie +
             "! " +
-            ChoiceToString(ChallengingPlayerChoice) + 
+            ChallengingPlayerChoice + 
             " versus " +
-            ChoiceToString(OtherPlayerChoice);
+            OtherPlayerChoice;
     }
     else if(result == c_ResultString_Win)
     {
         return c_ResultString_Win +
             "! " +
-            ChoiceToString(ChallengingPlayerChoice) + 
+            ChallengingPlayerChoice + 
             " beats " +
-            ChoiceToString(OtherPlayerChoice);
+            OtherPlayerChoice;
     }
     else
     {
         return c_ResultString_Lose +
             "! " +
-            ChoiceToString(OtherPlayerChoice) + 
+            OtherPlayerChoice + 
             " beats " +
-            ChoiceToString(ChallengingPlayerChoice);
+            ChallengingPlayerChoice;
     }
 }
 
@@ -306,7 +291,7 @@ function PlayMatchVersusAI(ChallengingPlayerInput)
     return PlayMatch_ChoicesFinal(ChallengingPlayerChoice, AI_Choice)
 }
 
-const c_GameMatchCount = 5;
+
 function PlayGame()
 {
     let WinCount_AI = 0;
