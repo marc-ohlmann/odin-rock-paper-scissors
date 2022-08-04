@@ -291,11 +291,20 @@ function PlayMatchVersusAI(ChallengingPlayerInput)
 }
 
 
+// interactive page 
 let WinCount_AI = 0;
 let WinCount_Player = 0;
 
-
 const resultText = document.querySelector('.ResultText');
+const winCountText = document.querySelector('.WinCountText');
+const loseCountText = document.querySelector('.LoseCountText');
+
+
+function UpdateCountText()
+{
+    winCountText.textContent = String(WinCount_Player);
+    loseCountText.textContent = String(WinCount_AI);
+}
 
 
 function HandlePlayerInput(PlayerInput)
@@ -318,6 +327,8 @@ function HandlePlayerInput(PlayerInput)
 
     resultText.textContent = result;
 
+    UpdateCountText();
+
     console.log(result);
 }
 
@@ -337,4 +348,15 @@ function InputButton_Paper()
 function InputButton_Scissors()
 {
     HandlePlayerInput(c_Choice_Scissors);
+}
+
+
+function InputButton_Reset()
+{
+    WinCount_AI = 0;
+    WinCount_Player = 0;
+    UpdateCountText();
+    resultText.textContent = "Make a choice to play";
+    ResetAIMemory();
+    resultText.setAttribute('style', 'background-color: lightgray;');
 }
