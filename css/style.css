@@ -1,0 +1,57 @@
+html{
+    background-color: aquamarine;
+}
+
+body{
+    display: flex;
+    flex-direction: row;
+}
+
+.PageContent{
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+}
+
+.Title{
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    text-decoration: underline;
+    flex: 1;
+    margin: 64px;
+}
+
+.ChoiceContainer{
+    display: flex;
+    flex: 1;
+    padding-left: 24px;
+    padding-right: 24px;
+    padding-bottom: 48px;
+    padding-top: 48px;
+    margin: 64px;
+}
+
+.ChoiceContainer div{
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.ChoiceButton{
+    background-color: lightgreen;
+}
+
+.ResultText{
+    margin: 128px;
+    text-align: center;
+    color: darkred;
+    background-color: lightcoral;
+}
+
+img{
+    height: 128px;
+    width: 128px;
+}
