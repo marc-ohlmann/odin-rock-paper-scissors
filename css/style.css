@@ -20,6 +20,7 @@ body{
     text-decoration: underline;
     flex: 1;
     margin: 64px;
+    font-size: 38px;
 }
 
 .ChoiceContainer{
@@ -41,14 +42,18 @@ body{
 }
 
 .ChoiceButton{
-    background-color: lightgreen;
+    background-color: gainsboro;
+    height: 128px;
+    width: 128px;
+    font-size: 24px;
 }
 
 .ResultText{
     margin: 128px;
     text-align: center;
-    color: darkred;
-    background-color: lightcoral;
+    color: black;
+    background-color: gray;
+    font-size: 36px;
 }
 
 img{

@@ -1,4 +1,6 @@
 
+
+
 // Choices
 const c_Choice_Null = "None";
 const c_Choice_Rock = "Rock";
@@ -11,9 +13,6 @@ const c_Choice_Count = c_Choices.length;
 const c_ResultString_Win = "win";
 const c_ResultString_Lose = "lose";
 const c_ResultString_Tie = "tie";
-
-// number of matches per game
-const c_GameMatchCount = 5;
 
 
 function InputToChoice(Input)
@@ -292,42 +291,50 @@ function PlayMatchVersusAI(ChallengingPlayerInput)
 }
 
 
-function PlayGame()
+let WinCount_AI = 0;
+let WinCount_Player = 0;
+
+
+const resultText = document.querySelector('.ResultText');
+
+
+function HandlePlayerInput(PlayerInput)
 {
-    let WinCount_AI = 0;
-    let WinCount_Player = 0;
-
-    for(let i = 0; i < c_GameMatchCount; i++)
+    let result = PlayMatchVersusAI(PlayerInput);
+    if(result.includes(c_ResultString_Lose))
     {
-        PlayerInput = "";
-        while(IsValidInput(PlayerInput) == false)
-        {
-            PlayerInput = prompt();
-        }
-
-        let result = PlayMatchVersusAI(PlayerInput);
-        console.log("Round " + String(i + 1) + ": " + result);
-
-        if(result.includes(c_ResultString_Lose))
-        {
-            WinCount_AI++;
-        }
-        else if(result.includes(c_ResultString_Win))
-        {
-            WinCount_Player++;
-        }
+        WinCount_AI++;
+        resultText.setAttribute('style', 'background-color: lightcoral;');
     }
-
-    if(WinCount_AI == WinCount_Player)
+    else if(result.includes(c_ResultString_Win))
     {
-        console.log("You tied the game!");
-    }
-    else if(WinCount_Player > WinCount_AI)
-    {
-        console.log("You won the game!");
+        WinCount_Player++;
+        resultText.setAttribute('style', 'background-color: lightgreen;');
     }
     else
     {
-        console.log("You lost the game!");
+        resultText.setAttribute('style', 'background-color: lightgray;');
     }
+
+    resultText.textContent = result;
+
+    console.log(result);
+}
+
+
+function InputButton_Rock()
+{
+    HandlePlayerInput(c_Choice_Rock);
+}
+
+
+function InputButton_Paper()
+{
+    HandlePlayerInput(c_Choice_Paper);
+}
+
+
+function InputButton_Scissors()
+{
+    HandlePlayerInput(c_Choice_Scissors);
 }

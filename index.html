@@ -50,7 +50,7 @@
         <!--
             link to external js script
         -->
-        <script src="./js/rock-paper-scissors.js"></script>
+        <script src="./js/rock-paper-scissors.js" defer></script>
 
     </head>
 
@@ -62,22 +62,22 @@
     <body>
         
         <div class="PageContent">
-            <div class="Title">Rock Paper Scissors !!</div>
+            <div class="Title">Rock Paper Scissors</div>
             <div class="ChoiceContainer">
                 <div>
                     <img src="img/rock.png">
-                    <button class="ChoiceButton" id="Rock">Rock</button>
+                    <button class="ChoiceButton" onclick="InputButton_Rock()">Rock</button>
                 </div>
                 <div>
                     <img src="img/paper.png">
-                    <button class="ChoiceButton" id="Paper">Paper</button>
+                    <button class="ChoiceButton" onclick="InputButton_Paper()">Paper</button>
                 </div>
                 <div>
                     <img src="img/scissors.png">
-                    <button class="ChoiceButton" id="Scissors">Scissors</button>
+                    <button class="ChoiceButton" onclick="InputButton_Scissors()">Scissors</button>
                 </div>
             </div>
-            <div class="ResultText">Results</div>
+            <div class="ResultText">Make a choice to play</div>
         </div>
 
     </body>
